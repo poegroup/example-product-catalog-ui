@@ -32,16 +32,18 @@ body
 .Cart
   background white
   border-top 1px solid
+  box-sizing border-box
   bottom 0
   display flex
   font-size 1rem
+  padding-left 1rem
   position fixed
   width 100%
   &-item
     border 1px solid #ccc
     display flex
     height 4rem
-    margin 1rem
+    margin 1rem 1rem 1rem 0
     max-width 20rem
     padding 1rem
     &-thumbnail
