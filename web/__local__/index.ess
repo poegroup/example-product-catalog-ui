@@ -1,0 +1,51 @@
+.Product
+  &-list
+    display flex
+    &-card
+      display inline-block
+      width 200px
+      border 1px solid blue
+      margin 18px
+      align-self top
+      padding 18px
+      text-align center
+      &-image
+        height 160px
+        width 160px
+        margin 0 auto
+      &-heading
+        font-size 24px
+        word-wrap break-word
+      &-price
+        margin 8px 0
+      &-rating
+        height 24px
+        width 120px
+
+.ShoppingCart
+  width 450px
+  border-left 1px solid black
+  position absolute
+  top 0
+  right 0
+  padding-left 12px
+  height 100%
+  &-item
+    height 160px
+    width 100%
+    border 1px solid blue
+    padding 12px
+    &-thumbnail
+      height 100px
+      float left
+      margin-right 12px
+    &-title
+      font-size 24px
+    &-quantity
+      width 60px
+      display inline-block
+      &-input
+        display inline-block
+  &-checkout
+    &-price
+      font-size 64px

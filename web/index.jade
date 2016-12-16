@@ -1,0 +1,59 @@
+:doc
+  @name Product
+
+import './__local__/index.ess'
+
+var stars = [1,2,3,4,5]
+.Product-list
+  each product in _.products
+    .Product-list-card(key=product.href)
+      img.Product-list-card-image(src=product.image.src)
+      .Product-list-card-rating= 'average rating: ' + this.getRating(product.rating)
+      .Product-list-card-heading= product.title
+      .Product-list-card-price= '$' + product.price
+      button.Product-list-card-add(onClick=this.addItem.bind(null, product.add)) add to cart
+
+.ShoppingCart
+  each item in _.cart
+    .ShoppingCart-item(key=item.href)
+      img.ShoppingCart-item-thumbnail(src=item.product.image.src)
+      .ShoppingCart-item-title=item.product.title
+      .ShoppingCart-item-quantity
+        span quantity
+        input.ShoppingCart-item-quantity-input(type='number' min=0 max=10 value=item.quantity || 0 onChange=this.updateQuantity.bind(null, item.quantity.edit))
+      .ShoppingCart-item-rating
+        span rating
+        input.ShoppingCart-item-rating-input(type='number' min=0 max=5 value=item.product.rating || 0 onChange=this.updateRating.bind(null, item.product.rate))
+      .ShoppingCart-item-remove
+        button.remove(onClick=this.removeItem.bind(null, item.remove)) remove
+
+
+  if _.cart.checkout
+    .ShoppingCart-checkout(key='cart')
+      .ShoppingCart-checkout-price= '$' + _.cart.total
+      button.ShoppingCart-checkout-button(onClick=this.checkout.bind(null, _.cart.checkout)) Checkout
+
+:module
+  export function addItem(template) {
+    this.context.forms.create(template).submit();
+  }
+
+  export function checkout(template) {
+    this.context.forms.create(template).submit();
+  }
+
+  export function updateQuantity(template, evt) {
+    this.context.forms.create(template).set('quantity', evt.target.value).submit();
+  }
+
+  export function getRating(val) {
+    return Math.round(val);
+  }
+
+  export function updateRating(template, evt) {
+    this.context.forms.create(template).set('rating', evt.target.value).submit();
+  }
+
+  export function removeItem(template) {
+    this.context.forms.create(template).submit();
+  }
