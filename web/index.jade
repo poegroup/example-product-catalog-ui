@@ -12,7 +12,7 @@ var stars = [1,2,3,4,5]
         .Product-item-display-heading= product.title
       .Product-item-info
         .Product-item-info-price= '$' + product.price
-        .Product-item-info-rating= 'Rating: ' + this.getRating(product.rating)
+        .Product-item-info-rating= 'rating: ' + this.getRating(product.rating)
         button.Product-item-info-add(onClick=this.addItem.bind(null, product.add)) add to cart
 
 .Cart
@@ -23,10 +23,10 @@ var stars = [1,2,3,4,5]
         .Cart-item-content-title= item.product.title
         .Cart-item-content-info
           .Cart-item-content-info-quantity
-            span Quantity
+            span quantity
             input.Cart-item-content-info-quantity-input(type='number' min=0 max=10 value=item.quantity || 0 onChange=this.updateQuantity.bind(null, item.quantity.edit))
           .Cart-item-content-info-rating
-            span Rating
+            span rating
             input.Cart-item-content-info-rating-input(type='number' min=0 max=5 value=item.product.rating || 0 onChange=this.updateRating.bind(null, item.product.rate))
           .Cart-item-content-info-remove
             button.Cart-item-content-info-remove-button(onClick=this.removeItem.bind(null, item.remove)) remove
