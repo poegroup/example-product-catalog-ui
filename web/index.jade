@@ -4,34 +4,37 @@
 import './__local__/index.ess'
 
 var stars = [1,2,3,4,5]
-.Product-list
+.Product
   each product in _.products
-    .Product-list-card(key=product.href)
-      img.Product-list-card-image(src=product.image.src)
-      .Product-list-card-rating= 'average rating: ' + this.getRating(product.rating)
-      .Product-list-card-heading= product.title
-      .Product-list-card-price= '$' + product.price
-      button.Product-list-card-add(onClick=this.addItem.bind(null, product.add)) add to cart
+    .Product-item(key=product.href)
+      .Product-item-display
+        img.Product-item-display-image(src=product.image.src)
+        .Product-item-display-heading= product.title
+      .Product-item-info
+        .Product-item-info-price= '$' + product.price
+        .Product-item-info-rating= 'Rating: ' + this.getRating(product.rating)
+        button.Product-item-info-add(onClick=this.addItem.bind(null, product.add)) add to cart
 
-.ShoppingCart
+.Cart
   each item in _.cart
-    .ShoppingCart-item(key=item.href)
-      img.ShoppingCart-item-thumbnail(src=item.product.image.src)
-      .ShoppingCart-item-title=item.product.title
-      .ShoppingCart-item-quantity
-        span quantity
-        input.ShoppingCart-item-quantity-input(type='number' min=0 max=10 value=item.quantity || 0 onChange=this.updateQuantity.bind(null, item.quantity.edit))
-      .ShoppingCart-item-rating
-        span rating
-        input.ShoppingCart-item-rating-input(type='number' min=0 max=5 value=item.product.rating || 0 onChange=this.updateRating.bind(null, item.product.rate))
-      .ShoppingCart-item-remove
-        button.remove(onClick=this.removeItem.bind(null, item.remove)) remove
-
+    .Cart-item(key=item.href)
+      img.Cart-item-thumbnail(src=item.product.image.src)
+      .Cart-item-content
+        .Cart-item-content-title= item.product.title
+        .Cart-item-content-info
+          .Cart-item-content-info-quantity
+            span Quantity
+            input.Cart-item-content-info-quantity-input(type='number' min=0 max=10 value=item.quantity || 0 onChange=this.updateQuantity.bind(null, item.quantity.edit))
+          .Cart-item-content-info-rating
+            span Rating
+            input.Cart-item-content-info-rating-input(type='number' min=0 max=5 value=item.product.rating || 0 onChange=this.updateRating.bind(null, item.product.rate))
+          .Cart-item-content-info-remove
+            button.Cart-item-content-info-remove-button(onClick=this.removeItem.bind(null, item.remove)) remove
 
   if _.cart.checkout
-    .ShoppingCart-checkout(key='cart')
-      .ShoppingCart-checkout-price= '$' + _.cart.total
-      button.ShoppingCart-checkout-button(onClick=this.checkout.bind(null, _.cart.checkout)) Checkout
+    .Cart-checkout(key='cart')
+      .Cart-checkout-price= '$' + _.cart.total
+      button.Cart-checkout-button(onClick=this.checkout.bind(null, _.cart.checkout)) Checkout
 
 :module
   export function addItem(template) {
